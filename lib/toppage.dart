@@ -14,8 +14,8 @@ class TopPage extends StatefulWidget {
 }
 
 class _TopPageState extends State<TopPage> {
-  final String _baseUrl = 'https://jsonplaceholder.typicode.com/photos';
-  static const int _defaultLimit = 10;
+  final String _baseUrl = 'http://localhost:3000/photos';
+  static const int _defaultLimit = 2;
   List<ImageModel> images = [];
 
   String buildUrl({int page=1, int limit=_defaultLimit}) {
@@ -40,14 +40,20 @@ class _TopPageState extends State<TopPage> {
         title: Text(widget.title)
       ),
       body: Center(
-        child: SingleChildScrollView(
+        child: Container(
+//          scrollDirection: Axis.vertical,
           child: Column(
             children: <Widget>[
-              FutureBuilder(
-                future: this.fetchImages(),
-                builder: (context, snapshot) {
-                  return ImageList(snapshot.data);
-                },
+              Expanded(
+                child: FutureBuilder(
+                  future: this.fetchImages(),
+                  builder: (context, snapshot) {
+                    if (snapshot.data != null) {
+                      return ImageList(snapshot.data);
+                    }
+                    return Text('empty');
+                  },
+                ),
               ),
             ],
           ),
@@ -72,10 +78,10 @@ class ImageList extends StatelessWidget {
         return Container(
           child: Column(
             children: <Widget>[
-              Expanded(
+              SizedBox(
+                height: 300.0,
                 child: Image.network(image.url),
               ),
-              Text(image.title),
             ],
           ),
         );
