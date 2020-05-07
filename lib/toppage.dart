@@ -43,7 +43,6 @@ class _TopPageState extends State<TopPage> {
       ),
       body: Center(
         child: Container(
-//          scrollDirection: Axis.vertical,
           child: Column(
             children: <Widget>[
               Expanded(
@@ -74,12 +73,13 @@ class ImageList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
       itemCount: images.length,
       itemBuilder: (context, int index) {
         var image = images[index];
         return Container(
           child: GestureDetector(
-            onTap: () { Navigator.pushNamed(context, '/home'); },
+            onTapUp: (TapUpDetails details) { Navigator.pushNamed(context, '/home'); },
             child: Column(
               children: <Widget>[
                 SizedBox(
