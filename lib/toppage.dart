@@ -14,11 +14,13 @@ class TopPage extends StatefulWidget {
 }
 
 class _TopPageState extends State<TopPage> {
-  final String _baseUrl = 'http://localhost:3000/photos';
-  static const int _defaultLimit = 2;
+  final String _baseUrl = 'http://10.0.2.2:3000/photos';
+  static const int _defaultLimit = 4;
   List<ImageModel> images = [];
 
-  String buildUrl({int page=1, int limit=_defaultLimit}) {
+  String buildUrl({int page, int limit}) {
+    if (page == null || page < 1) page = 1;
+    if (limit == null || limit < _defaultLimit) limit = _defaultLimit;
     return '$_baseUrl?_page=$page&_limit=$limit';
   }
 
