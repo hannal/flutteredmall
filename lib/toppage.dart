@@ -78,13 +78,16 @@ class ImageList extends StatelessWidget {
       itemBuilder: (context, int index) {
         var image = images[index];
         return Container(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 300.0,
-                child: Image.network(image.url),
-              ),
-            ],
+          child: GestureDetector(
+            onTap: () { Navigator.pushNamed(context, '/home'); },
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 300.0,
+                  child: Image.network(image.url),
+                ),
+              ],
+            ),
           ),
         );
       },

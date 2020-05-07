@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
       ),
       home: TopPage(title: 'Flutterred Mall'),
+      routes: <String, WidgetBuilder> {
+        '/home': (BuildContext context) => TopPage(title: 'sub page'),
+      },
     );
   }
 }
